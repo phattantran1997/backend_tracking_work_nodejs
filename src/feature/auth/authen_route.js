@@ -42,6 +42,19 @@ router.post("/login", authController.login);
 router.post("/register", authController.register);
 
 /**
+ * GET /auth/check-token
+ * @summary Check if access token is valid
+ * @tags Authorization
+ * @security JWT
+ * @return {object} 200 - success response - application/json
+ * @return {object} 401 - Unauthorized response - application/json
+ * @return {object} 403 - Forbidden response - application/json
+ */
+router.get("/check-token", authenticateToken, (req, res) => {
+    res.status(200).json({ isValid: true });
+  });
+
+/**
  * POST /auth/forgot
  * @summary forgot account
  * @security JWT

@@ -5,7 +5,7 @@ export async function getAllCommunities() {
         let item = await db.Products.findAll();
         return item;
     } catch (error) {
-        throw new Error('Error:'+error.message);
+        throw new Error('Error:' + error.message);
     }
 }
 
@@ -16,15 +16,35 @@ export async function getByID(ID) {
         });
         return item
     } catch (error) {
-        throw new Error('Error:'+error.message);
+        throw new Error('Error:' + error.message);
+    }
+}
+
+export async function getByNameAndJobNo(attributes) {
+    try {
+        let item = await db.Products.findOne({
+            where: { Name: attributes.Name, JobNo: attributes.JobNo},
+        });
+        return item
+    } catch (error) {
+        throw new Error('Error:' + error.message);
     }
 }
 
 export async function createOne(data) {
     try {
-
         let newRecord = await db.Products.create({
-            //Add created attributes here
+            Name: data.Name,
+            JobNo: data.JobNo,
+            Notes: data.Notes,
+            Type: data.Type,
+            Description: data.Description,
+            Area: data.Area,
+            WidthDim: data.WidthDim,
+            DepthDim: data.DepthDim,
+            LengthDim: data.LengthDim,
+            Weight: data.Weight,
+            QRCode: data.QRCode
         });
 
         return {
@@ -33,7 +53,7 @@ export async function createOne(data) {
             message: 'The Products created successfully'
         };
     } catch (error) {
-        throw new Error('Error:'+ error.message);
+        throw new Error('Error:' + error.message);
     }
 }
 
@@ -53,7 +73,7 @@ export async function editOne(data) {
                 errCode: HttpStatusCode.OK,
                 data: Products,
                 message: 'The Products updated successfully',
-                
+
             };
         } else {
             return {
@@ -63,7 +83,7 @@ export async function editOne(data) {
             };
         }
     } catch (error) {
-        throw new Error('Error:'+ error.message);
+        throw new Error('Error:' + error.message);
     }
 }
 
@@ -90,8 +110,6 @@ export async function deleteOne(ID) {
             data: null
         };
     } catch (error) {
-        throw new Error('Error:'+ error.message);
+        throw new Error('Error:' + error.message);
     }
 }
-
-
