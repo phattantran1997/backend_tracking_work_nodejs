@@ -48,6 +48,21 @@ export async function getByNameAndJobNo(req, res) {
     }
 }
 
+export async function getJobno(req, res) {
+    try {
+        let items = await service.getDataJobno();
+
+        if (items.length > 0) {
+            return res.status(HttpStatusCode.OK).json(items);
+        } else {
+            return res.status(HttpStatusCode.NOT_FOUND).json({message:'products not found with this jobno'});
+        }
+    } catch (error) {
+        return res.status(HttpStatusCode.INTERNAL_SERVER).json(error);
+    }
+}
+
+
 export async function createOne(req, res) {
     try{
         let newRecord = await service.createOne(req.body);

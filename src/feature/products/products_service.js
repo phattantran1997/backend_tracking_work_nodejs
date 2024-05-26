@@ -23,14 +23,26 @@ export async function getByID(ID) {
 export async function getByNameAndJobNo(attributes) {
     try {
         let item = await db.Products.findOne({
-            where: { Name: attributes.Name, JobNo: attributes.JobNo},
+            where: { Name: attributes.Name, JobNo: attributes.JobNo },
         });
         return item
     } catch (error) {
         throw new Error('Error:' + error.message);
     }
 }
-
+export async function getDataJobno() {
+    try {
+        let item = await db.Products.findAll({
+            attributes: ['jobno'],
+            group: ['jobno'],
+            order: [['jobno', 'ASC']],
+        });
+        return item
+    }
+    catch (error) {
+        throw new Error('Error:' + error.message);
+    }
+}
 export async function createOne(data) {
     try {
         let newRecord = await db.Products.create({

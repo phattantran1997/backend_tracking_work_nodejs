@@ -56,6 +56,18 @@ router.get("/getById", controller.getById);
 router.get("/getByNameAndJobno", controller.getByNameAndJobNo);
 
 /**
+ * GET /api/products/getDataJobNo
+ * @summary get data Jobno 
+ * @security JWT
+ * @tags products
+ * @return {object} 200 - success response - application/json
+ * @return  400 - Bad request response
+ * @return  404 - Not Found
+ * @return  500 - Internal Server error
+ */
+router.get("/getDataJobNo", controller.getJobno);
+
+/**
  * POST /api/products/createOne
  * @summary create 1 products
  * @security JWT

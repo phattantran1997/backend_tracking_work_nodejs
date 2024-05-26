@@ -83,7 +83,7 @@ export async function login(data){
             };
         }
         else{
-            accessToken = generateAccessToken(data.username);
+            accessToken = generateAccessToken({username: user.username , role: user.role});
             user.accessToken = accessToken;
         }
         return {

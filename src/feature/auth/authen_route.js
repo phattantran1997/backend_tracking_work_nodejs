@@ -50,9 +50,7 @@ router.post("/register", authController.register);
  * @return {object} 401 - Unauthorized response - application/json
  * @return {object} 403 - Forbidden response - application/json
  */
-router.get("/check-token", authenticateToken, (req, res) => {
-    res.status(200).json({ isValid: true });
-  });
+router.get("/check-token", authController.checkTokenValid);
 
 /**
  * POST /auth/forgot

@@ -1,6 +1,7 @@
 import  * as  authService from "./auth_service";
 import * as userService from "../users/users_service.js"
 var HttpStatusCode = require("../../helper/HttpStatusCode.js");
+const jwt = require('jsonwebtoken');
 
 require("dotenv").config();
 
@@ -20,6 +21,29 @@ export async function register (req, res)  {
       .json({ message: error.message });
   }
 };
+
+export async function checkTokenValid(req, res) {
+  const token = req.headers["authorization"];;
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const user = decoded.user;
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found in token.' });
+    }
+
+    // Return the user's role in the response
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    return res.status(401).json({ message: 'Failed to authenticate token.' });
+  }
+}
+
 export async function login (req, res)  {
   let username = req.body.username;
   let password = req.body.password;
@@ -47,10 +71,10 @@ export async function  forgot (req, res)  {
     let data = await userService.reset(user);
     if (data) {
       return res.status(200).json({
-        msg: "Đã gửi mật khẩu mới về email!",
+        msg: "Send verification email sucessfully ",
       });
     } else {
-      res.status(500).json("Lỗi");
+      res.status(500).json("Error");
     }
   } catch (error) {
     res.status(500).json(error);
