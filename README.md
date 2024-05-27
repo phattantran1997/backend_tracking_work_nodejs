@@ -53,7 +53,7 @@ For more information on the routes and their endpoints, please refer to the API 
 ## Contributing
 Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
+1. Fork the repository. (link: https://github.com/phattantran1997/backend_tracking_work_nodejs)
 2. Create a new branch: git checkout -b feature/your-feature-name
 3. Make your changes and commit them: git commit -m 'Add your commit message'
 4. Push to the branch: git push origin feature/your-feature-name
