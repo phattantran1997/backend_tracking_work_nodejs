@@ -71,34 +71,63 @@ export async function createOne(data) {
 
 export async function editOne(data) {
     try {
-        let Products = await db.Products.findOne({
-            where: { id: data.id },
-            raw: false,
-        });
-
-        if (Products) {
-            //Add updated attributes here
-
-            await Products.save();
-
-            return {
-                errCode: HttpStatusCode.OK,
-                data: Products,
-                message: 'The Products updated successfully',
-
-            };
-        } else {
-            return {
-                errCode: HttpStatusCode.NOT_FOUND,
-                message: 'The Products not found!',
-                data: null
-            };
-        }
+        console.log(data);
+      let Products = await db.Products.findOne({
+        where: { id: data.id },
+        raw: false,
+      });
+  
+      if (Products) {
+        // Add updated attributes here
+        Products.Name = data.Name;
+        Products.JobNo = data.JobNo;
+        Products.Notes = data.Notes;
+        Products.Type = data.Type;
+        Products.Description = data.Description;
+        Products.Area = data.Area;
+        Products.WidthDim = data.WidthDim;
+        Products.DepthDim = data.DepthDim;
+        Products.LengthDim = data.LengthDim;
+        Products.Weight = data.Weight;
+        Products.QRCode = `Name: ${data.Name}, JobNo: ${data.JobNo}`;
+  
+        await Products.save();
+  
+        return {
+          errCode: HttpStatusCode.OK,
+          data: Products,
+          message: 'The Products updated successfully',
+        };
+      } else {
+        return {
+          errCode: HttpStatusCode.NOT_FOUND,
+          message: 'The Products not found!',
+          data: null
+        };
+      }
     } catch (error) {
-        throw new Error('Error:' + error.message);
+      throw new Error('Error:' + error.message);
     }
 }
 
+export async function updateQRCode(ID, QRCode) {
+    try {
+        const QRCodeString = typeof QRCode === 'string' ? QRCode : JSON.stringify(QRCode);
+
+        const product = await db.Products.update(
+            { QRCode: QRCodeString },  // Convert QRCode to string explicitly
+            { where: { id: ID } }
+        );
+        if (product[0]) { // Sequelize update returns an array where the first element is the number of affected rows
+            return { status: 200, message: "QR code updated successfully", data: QRCode };
+        } else {
+            return { status: 404, message: "Product not found" };
+        }
+    } catch (error) {
+        console.error("Error updating QR code in service:", error);
+        return { status: 500, message: "Internal Server Error", error: error.message };
+    }
+}
 export async function deleteOne(ID) {
     try {
         let foundProducts = await db.Products.findOne({

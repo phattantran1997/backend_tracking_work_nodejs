@@ -37,6 +37,27 @@ export async function getByOperatorID(Operator) {
         throw new Error('Error:' + error.message);
     }
 }
+
+export async function getByRangeDate(startDate, endDate){
+    try {
+        // Ensure dates are in the correct format if they are not being passed in that format
+        const format = 'DD/MM/YYYY'; // Adjust this format to match how dates are stored in JobDay
+        const start = moment(startDate, format).format(format);
+        const end = moment(endDate, format).format(format);
+
+        let items = await db.JobTimings.findAll({
+            where: {
+                JobDay: {
+                    [Op.between]: [start, end]
+                }
+            }
+        });
+        return items;
+    } catch (error) {
+        throw new Error('Error:' + error.message);
+    }
+}
+
 function durationToHms(duration) {
     const hours = Math.floor(duration.asHours());
     const minutes = Math.floor(duration.minutes());

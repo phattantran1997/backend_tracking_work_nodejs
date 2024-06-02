@@ -96,6 +96,20 @@ router.post("/createOne", controller.createOne);
 router.put("/editOne", controller.editOne);
 
 /**
+ * PUT /api/products/updateQRCode/
+ * @summary Update the QR code of a product
+ * @security JWT
+ * @tags products
+ * @param {number} id.query.required - the ID of the product
+ * @param {object} request.body.required - QR code data
+ * @return {object} 200 - Product updated successfully - application/json
+ * @return 400 - Bad request response
+ * @return 404 - Product not found
+ * @return 500 - Internal Server error
+ */
+router.put('/updateQRCode', controller.updateQRCode);
+
+/**
  * Delete /api/products/deleteOne
  * @summary delete 1 products
  * @security JWT

@@ -6,7 +6,7 @@ import initWebRoutes from './route/route';
 import connectDB from './config/connectDB';
 import cors from 'cors';
 
-require('dotenv').config({ path: './.env.dev' });
+require('dotenv');
 const app =express();
 app.use(express.json());
 

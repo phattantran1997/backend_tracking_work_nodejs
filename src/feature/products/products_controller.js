@@ -85,6 +85,21 @@ export async function editOne(req, res) {
         return res.status(HttpStatusCode.INTERNAL_SERVER).json(error);
     }
 }
+export async function updateQRCode(req, res) {
+    const id = req.query.id;  // Ensure you're accessing 'id' correctly
+
+    if (!id) {
+        return res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Missing ID required parameters' });
+    }
+
+    try {
+        let response = await service.updateQRCode(id, req.body);
+        return res.status(response.status).json(response);
+    } catch (error) {
+        console.error("Error in updateQRCode:", error);
+        return res.status(HttpStatusCode.INTERNAL_SERVER).json({ message: 'Internal Server Error', error: error.message });
+    }
+}
 
 export async function deleteOne(req, res) {
     if (!req.body.id) {

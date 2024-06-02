@@ -51,6 +51,21 @@ router.get("/getById", controller.getById);
 router.get("/getByOperatorID", controller.getByOperatorID);
 
 /**
+ * GET /api/JobTimings/getByRangeDate
+ * @summary get job timings by range of Date
+ * @security JWT
+ * @tags JobTimings
+ * @param {string} startDate.query.required - start Date
+ * @param {string} endDate.query.required - end Date
+ * @return {array<object>} 200 - success response - application/json
+ * @return 400 - Bad request response
+ * @return 404 - Not Found
+ * @return 500 - Internal Server error
+ */
+router.get("/getByRangeDate", controller.getByRangeDate);
+
+
+/**
  * POST /api/JobTimings/createOne
  * @summary create 1 JobTimings
  * @security JWT

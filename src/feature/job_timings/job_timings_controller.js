@@ -21,7 +21,7 @@ export async function getByOperatorID(req,res){
     const jobTimings = await service.getByOperatorID(operatorID);
 
     if (!jobTimings || jobTimings.length === 0) {
-      return res.status(HttpStatusCode.NOT_FOUND).json({ message: 'No job timings found for the given Operator ID' });
+      return res.status(HttpStatusCode.NOT_FOUND).json({ message: 'No job timings found for the given ' +operatorID });
     }
 
     return res.status(HttpStatusCode.OK).json(jobTimings);
@@ -31,6 +31,22 @@ export async function getByOperatorID(req,res){
   }
 }
 
+export async function getByRangeDate(req,res){
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    try {
+        const jobTimings = await service.getByRangeDate(startDate, endDate);
+    
+        if (!jobTimings || jobTimings.length === 0) {
+          return res.status(HttpStatusCode.NOT_FOUND).json({ message: 'No job timings found for the given Operator ID' });
+        }
+    
+        return res.status(HttpStatusCode.OK).json(jobTimings);
+      } catch (error) {
+        console.error('Error retrieving job timings:', error);
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal server error' });
+      }
+}
 export async function getById(req, res) {
     let id = req.query.id; 
     if (!id) {
