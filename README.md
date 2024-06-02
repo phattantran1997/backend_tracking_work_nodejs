@@ -2,17 +2,18 @@
 
 This repository contains the backend for the IFN666 assignment 3 course project, built with Express.js. The main function of this backend is to handle data processing, storage, and retrieval for tracking workers' activities.
 
-## Features and Frameworks
 
-- User authentication and authorization using JWT
-- CRUD operations for tracking data
-- API endpoints for retrieving and updating worker information
-- Integration with a MySQL database
-- Real-time updates using WebSockets
-- Middleware for handling JWT
-- Model generation using Mason - Bricks
+## 🚀 Features and Frameworks
 
-## Installation
+- **User Authentication and Authorization**: Implements JWT for secure access.
+- **CRUD Operations**: Facilitates create, read, update, and delete operations for tracking data.
+- **API Endpoints**: Provides endpoints for retrieving and updating worker information.
+- **Database Integration**: Uses MySQL to manage and store data.
+- **Real-time Updates**: Leverages WebSockets for delivering real-time updates.
+- **Middleware**: Utilizes middleware for handling JWT.
+- **Rapid Model Generation**: Uses the "mason cbnode" library for quickly creating new entity structures and their corresponding database tables.
+
+## 🛠 Installation
 
 1. **Clone the repository:**
 
@@ -35,22 +36,22 @@ This repository contains the backend for the IFN666 assignment 3 course project,
    This will create an optimized build in the dist directory.
 
 
-## API Documentation
+## 📄 API Documentation
 
-The API documentation is available at http://localhost:8081/api-docs when the server is running. It provides detailed information about the available endpoints and their usage.
+The API documentation is available at http://localhost:8081/swagger/index.html when the server is running. It provides detailed information about the available endpoints and their usage.
 
-## Routes
+## 📁 Routes
+
 The application has the following routes:
 
-- /users: This route handles user-related operations.
-- /products: This route handles products-related operations.
-- /jobtimings: This route handles jobtiming-related operations.
-- /authorization: This route handles authorization-related operations.
-
+- /users: Handles user-related operations.
+- /products: Manages products-related operations.
+- /jobtimings: Deals with job timing-related operations.
+- /authorization: Manages authorization-related operations.
 For more information on the routes and their endpoints, please refer to the API documentation.
 
 
-## Contributing
+## 🌱 Contributing
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository. (link: https://github.com/phattantran1997/backend_tracking_work_nodejs)
@@ -59,5 +60,8 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch: git push origin feature/your-feature-name
 5. Submit a pull request.
 
-## License
+## 📜 License
 This project is licensed under the MIT License.
+
+
+
